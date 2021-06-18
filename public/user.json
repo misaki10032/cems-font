@@ -1,0 +1,22 @@
+{
+  "name": "chenxinyu",
+  "sex": "男",
+  "age": 21,
+  "pwd": 123,
+  "house": "陕西省延安市黄龙县",
+  "likefoods": {
+    "drink": "果汁",
+    "eat": "火锅"
+  },
+  "likeDM": [
+    {
+      "name": "刀剑神域"
+    },
+    {
+      "name": "从零开始的异世界"
+    },
+    {
+      "name": "daring in the Fklitry"
+    }
+  ]
+}
