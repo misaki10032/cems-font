@@ -9,7 +9,8 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(router);
-axios.defaults.baseURL = "http://192.168.31.225:9999/web/";
+axios.defaults.baseURL = "http://localhost:9999/web/";
+// axios.defaults.baseURL = "http://192.168.31.225:9999/web/";
 
 axios.interceptors.request.use(config => {
     config.headers.token = window.sessionStorage.getItem('token');

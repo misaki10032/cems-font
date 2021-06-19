@@ -27,8 +27,9 @@
       <el-table-column label="委托状态" prop="entState" sortable width="100"></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">审核</el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">退钱</el-button>
+
+          <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)"  :disabled="scope.row.entPlan == '已完成'">审核</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">终止任务</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -55,18 +56,66 @@ export default {
   mounted() {
     this.findEntList(1, this.pageInfo.pageSize);
   },
+
+
   methods: {
+
+
     handleEdit(index, row) {
-      alert("审核-" + row.id + "-号委托")
+      this.$confirm('是否修改其委托状态?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: true
+      }).then(() => {
+        this.updataEntState(index, row),
+        this.$message({
+
+          type: 'success',
+          message: '修改成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+
     },
+    //   this.$axios.get("/updataEntState/", {
+    //     params: {
+    //       rowid,
+    //       rowstatus
+    //     }
+    //   }).then(res => {
+    //     if (res.data != "0") {
+    //       row.entState = res.data
+    //     } else {
+    //       this.$message({
+    //         message: '服务器异常',
+    //         type: 'error'
+    //       });
+    //     }
+    //   }).catch((err) => {
+    //     this.$message({
+    //       message: '服务器异常' + err,
+    //       type: 'error'
+    //     });
+    //   });
+    //   console.log(row.id + "===row.id")
+    // },
+
+
     handleDelete(index, row) {
       alert("退钱-" + row.id + "-号委托")
     },
+
     formatDate(row, column, cellValue) {
       console.log(cellValue)
       let date = new Date(cellValue);
       return date.toLocaleString();
     },
+
     findEntList(page, limit) {
       var that = this;
       this.$axios.post("/getEntlimit/" + page + "/" + limit).then(function (res) {
@@ -76,17 +125,47 @@ export default {
           that.pageInfo.total = res.data.total;
         }
       })
-    },
+    }
+    ,
     handleSizeChange(val) {
       this.pageInfo.pageSize = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);
       console.log('当前: ${val}每页');
-    },
+    }
+    ,
     handleCurrentChange(val) {
       this.pageInfo.pageNum = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);
       console.log('当前页: ${this.pageInfo.pageNum}');
-    }
+    },
+
+    //更该委托的状态
+    updataEntState(index, row){
+      var rowid = row.id
+      var rowstatus = row.entState
+        this.$axios.get("/updataEntState/", {
+          params: {
+            rowid,
+            rowstatus
+          }
+        }).then(res => {
+          if (res.data != "0") {
+            row.entState = res.data
+          } else {
+            this.$message({
+              message: '服务器异常',
+              type: 'error'
+            });
+          }
+        }).catch((err) => {
+          this.$message({
+            message: '服务器异常' + err,
+            type: 'error'
+          });
+        });
+        console.log(row.id + "===row.id")
+      },
+
   }
 }
 </script>
