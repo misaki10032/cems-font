@@ -33,11 +33,11 @@
         </template>
       </el-table-column>
     </el-table>
+
     <el-pagination :current-page="pageInfo.currentPage" :page-size="pageInfo.pageSize"
                    :page-sizes="[3, 5, 8, 20]" :total="pageInfo.total" layout="total, sizes, prev, pager, next, jumper"
                    @size-change="handleSizeChange" @current-change="handleCurrentChange">
     </el-pagination>
-
   </div>
 </template>
 
