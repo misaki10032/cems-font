@@ -37,6 +37,7 @@
                    :page-sizes="[3, 5, 8, 20]" :total="pageInfo.total" layout="total, sizes, prev, pager, next, jumper"
                    @size-change="handleSizeChange" @current-change="handleCurrentChange">
     </el-pagination>
+
   </div>
 </template>
 
