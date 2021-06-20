@@ -53,16 +53,17 @@
               </el-submenu>
             </el-submenu>
             <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+            <el-tooltip class="item" content="退出登录" effect="dark" placement="bottom">
+              <el-button circle icon="el-icon-s-release" style="margin-right:20px " type="primary"
+                         @click="logOut"></el-button>
+            </el-tooltip>
             <span style="color: white;"><i class="el-icon-user-solid"></i>&nbsp;&nbsp;{{ num }}</span>
             <el-dropdown style="margin-left: 20px;">
-              <i class="el-icon-setting" style="margin-right: 15px;color: white;"></i>
+              <i class="el-icon-s-operation" style="margin-right: 15px;color: white;"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>个人空间</el-dropdown-item>
                 <el-dropdown-item>升级申请</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
-                <router-link to="/login">
-                  <el-dropdown-item>退出登录</el-dropdown-item>
-                </router-link>
               </el-dropdown-menu>
             </el-dropdown>
           </el-menu>
@@ -85,6 +86,11 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    logOut() {
+      sessionStorage.clear();
+      alert("点击了退出")
+      this.$router.push("/login");
     }
   }
 };

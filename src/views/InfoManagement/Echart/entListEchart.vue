@@ -1,13 +1,12 @@
 <template>
-
-  <div style="width:100%;height:100%;">
+  <div style="height:100%;">
     <el-button @click="gotolink" class="btn btn-success" plain>表格</el-button>
-
-    <!--    委托数据扇状图-->
-    <div id="charts" style="width:100%;height:100%;margin: auto">
-    </div>
-
-
+    <el-row>
+      <el-col :span="18">
+        <div id="charts" style="height:658px;margin: auto">
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -25,19 +24,14 @@ export default {
   },
 
   mounted() {
-
     this.$axios.get('/entrustEchart').then((res) => {
-          // 基于准备好的dom，初始化echarts实例
           var option = echarts.init(document.getElementById('charts'));
-
-          // 指定图表的配置项和数据
           option.setOption({
             tooltip: {
               trigger: 'item',
               formatter: '{a} <br/>{b}: {c} ({d}%)'
             },
             legend: {
-              // data: ['直达', '营销广告', '搜索引擎', '邮件营销', '联盟广告', '视频广告', '百度', '谷歌', '必应', '其他']
               data: res.data.EntPlanName
             },
             series: [
@@ -98,7 +92,10 @@ export default {
                 data: res.data.EntrusType,
               }
             ]
-          })
+          });
+          window.onresize = function () {
+            option.resize();
+          }
         }
     );
   }
