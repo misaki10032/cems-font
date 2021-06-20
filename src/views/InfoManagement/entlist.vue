@@ -1,5 +1,7 @@
 <template>
   <div>
+    <el-button @click="goto" class="btn btn-success" plain>图形</el-button>
+
     <el-table :data="tableData" style="width: 100%;">
       <el-table-column fixed label="ID" v-model="form.entrustId" prop="id" sortable width="100"></el-table-column>
       <el-table-column v-model="form.entConsignor" prop="ientConsignord" label="委托人" width="70">
@@ -45,6 +47,7 @@
 
 <script>
 export default {
+
   data() {
     return {
       tableData: [],
@@ -70,7 +73,14 @@ export default {
 
 
   methods: {
+    //点击跳转至上次浏览页面
+    goto() {
+      //点击跳转至上次浏览页面
+      // this.$router.go(-1)
 
+      //指定跳转地址
+      this.$router.replace('/entListEchart')
+    },
     //删除委托函数
     handleDelete1(index, row) {
       // var that = this;

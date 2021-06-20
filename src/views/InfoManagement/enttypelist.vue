@@ -1,7 +1,7 @@
 <template>
-
-
   <div>
+    <el-button @click="gotolink" class="btn btn-success"  plain>图形</el-button>
+
     <el-button type="success" @click="dialogFormVisible = true" plain>添加类型</el-button>
     <el-dialog title="添加类型" :visible.sync="dialogFormVisible">
       <el-form :model="form">
@@ -58,6 +58,15 @@ export default {
     this.findEntList(1, this.pageInfo.pageSize);
   },
   methods: {
+
+    gotolink(){
+      //点击跳转至上次浏览页面
+      // this.$router.go(-1)
+
+      //指定跳转地址
+      this.$router.replace('/entTypeEchart')
+    },
+
     handleEdit(index, row) {
       alert("查看-" + row.id + "-类型")
     },
@@ -136,8 +145,7 @@ export default {
       this.$axios.get("/handleDeleteById/" + row.id).then(function () {
         console.log("正在删除_")
       })
-      //回显数据
-      this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize)
+     this.tableData.splice(index, 1);
     },
 
 

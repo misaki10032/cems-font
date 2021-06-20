@@ -5,6 +5,9 @@ import entlist from "../views/InfoManagement/entlist.vue";
 import login from "../views/login.vue";
 import main from "../views/main.vue";
 import enttypelist from "../views/InfoManagement/enttypelist.vue"
+import entTypeEchart from "../views/InfoManagement/Echart/entTypeEchart.vue"
+import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
+
 // import App from "../App.vue";
 
 Vue.use(router)
@@ -28,6 +31,12 @@ var rout = new router({
             {
                 path: "/enttypelist",
                 component: enttypelist
+            },{
+                path: "/entTypeEchart",
+                component: entTypeEchart
+            },{
+                path: "/entListEchart",
+                component: entListEchart
             }
         ]
     }, {
