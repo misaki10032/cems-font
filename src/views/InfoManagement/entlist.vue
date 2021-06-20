@@ -71,7 +71,8 @@ export default {
 
   methods: {
 
-    handleDelete(index, row) {
+    //删除委托函数
+    handleDelete1(index, row) {
       // var that = this;
       this.form.entrustId = row.id,
           this.form.entPlan = row.entPlan,
@@ -92,6 +93,26 @@ export default {
         }
       });
     },
+
+    handleDelete(index, row) {
+      this.$confirm('是否终止该任务?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: true
+      }).then(() => {
+        //调用删除委托函数
+        this.handleDelete1(index, row)
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+
+
     handleEdit(index, row) {
       this.$confirm('是否修改其委托状态?', '提示', {
         confirmButtonText: '确定',

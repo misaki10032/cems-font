@@ -45,8 +45,10 @@ export default {
     handleEdit(index, row) {
       alert("查看-" + row.id + "-类型")
     },
+
+
     handleDelete(index, row) {
-      console.log("删除-" + row.id + "-类型")
+
       var str = row.entType + "  数量为:" + row.entTypeNum + "  "
       if (row.entTypeNum === 0) {
         this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -55,13 +57,17 @@ export default {
           type: 'warning',
           center: true
         }).then(() => {
+          //删除数据
+          this.handleDeleteById(index, row)
+          //回显数据
+          this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize)
           this.$message({
             message: str + '<-删除成功->',
             type: 'success'
           });
-          this.sleep(1000)
-          //刷新页面
-          window.location.reload();
+          // this.sleep(1000)
+          // //刷新页面
+          // window.location.reload();
         })
       } else {
         this.$message({
@@ -70,6 +76,16 @@ export default {
         });
       }
     },
+
+
+    handleDeleteById(index, row) {
+      console.log("删除-" + row.id + "-类型")
+      this.$axios.get("/handleDeleteById/" + row.id).then(function () {
+        console.log("正在删除_")
+      })
+    },
+
+
     formatDate(row, column, cellValue) {
       console.log(cellValue)
       let date = new Date(cellValue);
