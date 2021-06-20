@@ -2,10 +2,10 @@
   <div>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="手机号">
-        <el-input v-model="formInline.user" placeholder="手机号"></el-input>
+        <el-input v-model="formInline.user" placeholder="审批人"></el-input>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="formInline.region" placeholder="状态">
+        <el-select v-model="formInline.region" placeholder="活动区域">
           <el-option label="正常" value="正常"></el-option>
           <el-option label="封禁" value="封禁"></el-option>
         </el-select>
@@ -38,6 +38,7 @@
                      inactive-color="#11d922" inactive-text="正常" inactive-value="正常"
                      @change="handleEdit(scope.$index, scope.row)">
           </el-switch>
+          <!-- <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">封禁</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -101,10 +102,34 @@ export default {
         });
       });
     },
+    handleDelete(index, row) {
+      var rowid = row.id
+      var rowstatus = row.status
+      this.$axios.get("/killuser", {
+        params: {
+          rowid,
+          rowstatus
+        }
+      }).then(res => {
+        if (res.data != "0") {
+          row.status = res.data
+        } else {
+          this.$message({
+            message: '服务器异常',
+            type: 'error'
+          });
+        }
+      }).catch((err) => {
+        this.$message({
+          message: '服务器异常' + err,
+          type: 'error'
+        });
+      });
+    },
     findUserList(page, limit) {
       var that = this;
       if (this.sel == "all") {
-        this.$axios.post("/getUserlimit/" + page + "/" + limit).then(function (res) {
+        this.$axios.post("/getUserlimit/" + page + "/" + limit,).then(function (res) {
           if (res.data.code != "500") {
             that.tableData = res.data.data;
             that.total = res.data.total;

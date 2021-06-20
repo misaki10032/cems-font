@@ -19,8 +19,8 @@
             <template slot="title"><i class="el-icon-menu"></i>论坛管理</template>
             <el-menu-item-group>
               <template slot="title">帖子|评论</template>
-              <el-menu-item index="2-1">帖子管理</el-menu-item>
-              <el-menu-item index="2-2">评论管理</el-menu-item>
+              <el-menu-item index="/articlelist">帖子管理</el-menu-item>
+              <el-menu-item index="/commentlist">评论管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3">

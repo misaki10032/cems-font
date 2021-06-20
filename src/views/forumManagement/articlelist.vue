@@ -1,13 +1,13 @@
 <template>
   <div>
-    <el-form :inline="true" :model="formInline" class="demo-form-inline">
-      <el-form-item label="手机号">
-        <el-input v-model="formInline.user" placeholder="手机号"></el-input>
+    <el-form :inline="true" :model="formArticle" class="demo-form-inline">
+      <el-form-item label="帖子标题">
+        <el-input v-model="formArticle.title" placeholder="帖子标题"></el-input>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="formInline.region" placeholder="状态">
-          <el-option label="正常" value="正常"></el-option>
-          <el-option label="封禁" value="封禁"></el-option>
+        <el-select v-model="formArticle.status" placeholder="状态">
+          <el-option label="已审核" value="已审核"></el-option>
+          <el-option label="未审核" value="未审核"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -18,24 +18,14 @@
       <el-table-column type="selection" width="55">
       </el-table-column>
       <el-table-column fixed label="ID" prop="id" sortable width="100"></el-table-column>
-      <el-table-column label="手机号" width="180">
-        <template slot-scope="scope">
-          <el-popover placement="top" trigger="hover">
-            <p>手机号: {{ scope.row.userPhone }}</p>
-            <p>密码: {{ scope.row.userPwd }}</p>
-            <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{ scope.row.userPhone }}</el-tag>
-            </div>
-          </el-popover>
-        </template>
-      </el-table-column>
-      <el-table-column :formatter="formatRole" fixed label="角色" prop="userRole" sortable width="200">
-      </el-table-column>
+      <el-table-column fixed label="用户id" prop="userId" sortable width="100"></el-table-column>
+      <el-table-column fixed label="标题" prop="foTitle" sortable width="200"></el-table-column>
+      <el-table-column :formatter="formatDate" label="发帖时间" prop="gmtCreate" sortable width="200"></el-table-column>
       <el-table-column label="状态" prop="status" sortable width="200"></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.status" active-color="#d90000" active-text="封禁" active-value="封禁"
-                     inactive-color="#11d922" inactive-text="正常" inactive-value="正常"
+          <el-switch v-model="scope.row.status" active-color="#d90000" active-text="未审核" active-value="未审核"
+                     inactive-color="#11d922" inactive-text="已审核" inactive-value="已审核"
                      @change="handleEdit(scope.$index, scope.row)">
           </el-switch>
         </template>
@@ -60,9 +50,9 @@ export default {
         pageNum: 1,
         pageSize: 10
       },
-      formInline: {
-        user: '',
-        region: '',
+      formArticle: {
+        title: '',
+        status: '',
         pageNum: 1,
         pageSize: 3
       },
@@ -70,17 +60,13 @@ export default {
     }
   },
   mounted() {
-    this.findUserList(1, this.pageInfo.pageSize);
+    this.findArtList(1, this.pageInfo.pageSize);
   },
   methods: {
-    formatRole(row, column, cellValue) {
-      var newValue = cellValue == "complete" ? "委托人" : "代理人";
-      return newValue;
-    },
     handleEdit(index, row) {
       var rowid = row.id
       var rowstatus = row.status
-      this.$axios.get("/killuser", {
+      this.$axios.get("/killArticle", {
         params: {
           rowid,
           rowstatus
@@ -101,20 +87,21 @@ export default {
         });
       });
     },
-    findUserList(page, limit) {
+    findArtList(page, limit) {
       var that = this;
       if (this.sel == "all") {
-        this.$axios.post("/getUserlimit/" + page + "/" + limit).then(function (res) {
+        this.$axios.post("/getArtlimit/" + page + "/" + limit).then(function (res) {
           if (res.data.code != "500") {
             that.tableData = res.data.data;
+            console.log(res.data.data)
             that.total = res.data.total;
             that.pageInfo.total = res.data.total;
           }
         })
       } else {
-        this.formInline.pageNum = this.pageInfo.pageNum;
-        this.formInline.pageSize = this.pageInfo.pageSize;
-        this.$axios.post("/getUserLike", this.formInline).then(res => {
+        this.formArticle.pageNum = this.pageInfo.pageNum;
+        this.formArticle.pageSize = this.pageInfo.pageSize;
+        this.$axios.post("/getArtLike", this.formArticle).then(res => {
           if (res.data.code != "500") {
             this.tableData = res.data.data;
             this.total = res.data.total;
@@ -125,25 +112,28 @@ export default {
     },
     handleSizeChange(val) {
       this.pageInfo.pageSize = val;
-      this.findUserList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前: ${val}每页');
+      this.findArtList(this.pageInfo.pageNum, this.pageInfo.pageSize);
     },
     handleCurrentChange(val) {
       this.pageInfo.pageNum = val;
-      this.findUserList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前页: ${this.pageInfo.pageNum}');
+      this.findArtList(this.pageInfo.pageNum, this.pageInfo.pageSize);
+    },
+    formatDate(row, column, cellValue) {
+      console.log(cellValue)
+      let date = new Date(cellValue);
+      return date.toLocaleString();
     },
     onSubmit() {
-      this.formInline.pageNum = this.pageInfo.pageNum;
-      this.formInline.pageSize = this.pageInfo.pageSize;
-      if (this.formInline.region == null || this.formInline.region == "") {
+      this.formArticle.pageNum = this.pageInfo.pageNum;
+      this.formArticle.pageSize = this.pageInfo.pageSize;
+      if (this.formArticle.status == null || this.formArticle.status == "") {
         this.$message({
           message: '状态为空',
           type: 'error'
         });
       } else {
         this.sel = "sub"
-        this.$axios.post("/getUserLike", this.formInline).then(res => {
+        this.$axios.post("/getArtLike", this.formArticle).then(res => {
           if (res.data.code != "500") {
             this.tableData = res.data.data;
             this.total = res.data.total;

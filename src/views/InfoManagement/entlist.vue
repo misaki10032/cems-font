@@ -15,7 +15,7 @@
       </el-table-column>
       <el-table-column label="代理人" prop="entAgent" width="70"></el-table-column>
       <el-table-column label="完成情况" prop="entPlan" width="150"></el-table-column>
-      <el-table-column label="发布时间" prop="gmtCreate" width="200"></el-table-column>
+      <el-table-column :formatter="formatDate" label="发布时间" prop="gmtCreate" width="200"></el-table-column>
       <el-table-column :formatter="formatDate" :sortable="true" label="完成期限" prop="gmtEnd"
                        width="200"></el-table-column>
       <el-table-column label="成交价格" width="150">

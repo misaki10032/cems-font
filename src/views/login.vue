@@ -6,7 +6,7 @@
       <div class="img_box">
         <img src="../assets/snut.png"/>
       </div>
-      <!-- 表单区域          表单数据绑定-->
+      <!-- 表单区域表单数据绑定-->
       <el-form ref="formRef" :model="loginForm" :rules="loginFormRules" class="login_form">
         <el-form-item prop="account">
           <el-input v-model="loginForm.num" placeholder="请输入账号" prefix-icon="iconfont icon-yonghu">
