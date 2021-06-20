@@ -156,7 +156,6 @@ export default {
     //   console.log(row.id + "===row.id")
     // },
 
-
     formatDate(row, column, cellValue) {
       console.log(cellValue)
       let date = new Date(cellValue);
