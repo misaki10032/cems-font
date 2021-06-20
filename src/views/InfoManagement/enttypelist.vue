@@ -1,8 +1,14 @@
 <template>
+
+
   <div>
+    <el-row>
+      <el-button round @click="openType()">添加类型</el-button>
+    </el-row>
     <el-table :data="tableData" style="width: 100%;">
       <el-table-column fixed label="ID" prop="id" sortable width="100"></el-table-column>
-      <el-table-column label="委托状态" prop="entType" sortable width="100"></el-table-column>
+      <el-table-column label="委托类型" prop="entType" sortable width="100"></el-table-column>
+      <el-table-column label="数量" prop="entTypeNum" sortable width="100"></el-table-column>
       <el-table-column label="操作" width="200">
         <template slot-scope="scope">
           <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">查看</el-button>
@@ -18,6 +24,8 @@
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
@@ -37,9 +45,48 @@ export default {
     handleEdit(index, row) {
       alert("查看-" + row.id + "-类型")
     },
+
+
     handleDelete(index, row) {
-      alert("删除-" + row.id + "-类型")
+
+      var str = row.entType + "  数量为:" + row.entTypeNum + "  "
+      if (row.entTypeNum === 0) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          //删除数据
+          this.handleDeleteById(index, row)
+          //回显数据
+          this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize)
+          this.$message({
+            message: str + '<-删除成功->',
+            type: 'success'
+
+          });
+          // this.sleep(1000)
+          // //刷新页面
+          // window.location.reload();
+        })
+      } else {
+        this.$message({
+          message: str + '<-不可删除->',
+          type: 'error'
+        });
+      }
     },
+
+
+    handleDeleteById(index, row) {
+      console.log("删除-" + row.id + "-类型")
+      this.$axios.get("/handleDeleteById/" + row.id).then(function () {
+        console.log("正在删除_")
+      })
+    },
+
+
     formatDate(row, column, cellValue) {
       console.log(cellValue)
       let date = new Date(cellValue);
@@ -48,6 +95,7 @@ export default {
     findEntList(page, limit) {
       var that = this;
       this.$axios.post("/getEntTypelimit/" + page + "/" + limit).then(function (res) {
+        console.log("getEntTypelimit________")
         if (res.data.code != "500") {
           that.tableData = res.data.data;
           that.total = res.data.total;
