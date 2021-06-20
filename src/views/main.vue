@@ -40,10 +40,11 @@
                    class="el-menu-demo" mode="horizontal" text-color="#fff" @select="handleSelect">
             <el-menu-item index="1">处理中心</el-menu-item>
             <el-submenu index="2">
-              <template slot="title">我的工作台</template>
-              <el-menu-item index="2-1">选项1</el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
-              <el-menu-item index="2-3">选项3</el-menu-item>
+              <template slot="title">管理员管理</template>
+              <el-menu-item index="2-1">管理员信息</el-menu-item>
+              <el-menu-item index="2-2">管理员申诉</el-menu-item>
+              <el-menu-item index="2-3">管理员升级请求</el-menu-item>
+              <el-menu-item index="2-4">管理员绩效</el-menu-item>
               <el-submenu index="2-4">
                 <template slot="title">选项4</template>
                 <el-menu-item index="2-4-1">选项1</el-menu-item>
@@ -57,6 +58,7 @@
               <i class="el-icon-setting" style="margin-right: 15px;color: white;"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>个人空间</el-dropdown-item>
+                <el-dropdown-item>升级申请</el-dropdown-item>
                 <el-dropdown-item>修改密码</el-dropdown-item>
                 <router-link to="/login">
                   <el-dropdown-item>退出登录</el-dropdown-item>

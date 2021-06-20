@@ -1,6 +1,4 @@
 <template>
-
-
   <div>
     <el-row>
       <el-button round @click="openType()">添加类型</el-button>
@@ -95,7 +93,6 @@ export default {
     findEntList(page, limit) {
       var that = this;
       this.$axios.post("/getEntTypelimit/" + page + "/" + limit).then(function (res) {
-        console.log("getEntTypelimit________")
         if (res.data.code != "500") {
           that.tableData = res.data.data;
           that.total = res.data.total;

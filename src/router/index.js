@@ -38,7 +38,7 @@ var rout = new router({
             {
                 path: "/commentlist",
                 component: commentlist
-            }
+            },
         ]
     }, {
         path: "/",
