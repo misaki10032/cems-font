@@ -8,6 +8,9 @@ import enttypelist from "../views/InfoManagement/enttypelist.vue"
 import articlelist from "../views/forumManagement/articlelist.vue";
 import commentlist from "../views/forumManagement/commentlist.vue";
 import replylist from "../views/forumManagement/replylist.vue";
+import entTypeEchart from "../views/InfoManagement/Echart/entTypeEchart.vue"
+import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
+
 // import App from "../App.vue";
 
 Vue.use(router)
@@ -31,6 +34,12 @@ var rout = new router({
             {
                 path: "/enttypelist",
                 component: enttypelist
+            },{
+                path: "/entTypeEchart",
+                component: entTypeEchart
+            },{
+                path: "/entListEchart",
+                component: entListEchart
             },
             {
                 path: "/articlelist",
