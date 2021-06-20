@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <el-container style="height: 100%; border: 1px solid #e5e5e5">
+    <el-container style="height: 760px; border: 1px solid #e5e5e5">
       <el-aside style="height: 100%;background-color: #ffffff;color: white;" width="250px">
         <el-menu :default-openeds="['1']" router>
           <div style="height: 21px;text-align: center;padding: 20px 0 20px 0;background-color: #06baec;">
