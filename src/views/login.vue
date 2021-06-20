@@ -21,18 +21,77 @@
 
         <el-form-item class="btn_box">
           <el-button type="primary" @click="login">登录</el-button>
-          <el-button type="info" @click="resetForm">重置</el-button>
+          <el-button type="info" @click="dialogFormVisible1 = true">注册</el-button>
+          <el-button type="info" @click="dialogFormVisible = true">申诉</el-button>
         </el-form-item>
       </el-form>
     </div>
+
+    <el-dialog :visible.sync="dialogFormVisible1" title="账号注册">
+      <el-form :model="form1">
+        <el-form-item :label-width="formLabelWidth" label="账号">
+          <el-input v-model="form1.acc" autocomplete="off" placeholder="请输入账号"></el-input>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="密码">
+          <el-input v-model="form1.psw" autocomplete="off" placeholder="请输入密码" type="password"></el-input>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="密码">
+          <el-input v-model="form1.psw2" autocomplete="off" placeholder="请再次输入密码" type="password"></el-input>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="手机号">
+          <el-input v-model="form1.phone" autocomplete="off" placeholder="请输入手机号"></el-input>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="邮箱">
+          <el-input v-model="form1.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible1 = false">取 消</el-button>
+        <el-button type="primary">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog :visible.sync="dialogFormVisible" title="账号申诉">
+      <el-form :model="form">
+        <el-form-item :label-width="formLabelWidth" label="手机号">
+          <el-input v-model="form.phone" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="密码">
+          <el-input v-model="form.psw" autocomplete="off" type="password"></el-input>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="理由">
+          <el-input v-model="form.desc" type="textarea"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="send">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
+
 </template>
 
 <script>
 export default {
   data() {
     return {
+      form: {
+        phone: "",
+        desc: "",
+        psw: ""
+      },
+      formLabelWidth: "60px",
+      dialogFormVisible: false,
+      dialogFormVisible1: false,
       userlist: {},
+      form1: {
+        acc: "",
+        psw: "",
+        psw2: "",
+        phone: "",
+        email: ""
+      },
       loginForm: {
         num: "",
         pwd: ""
@@ -68,6 +127,29 @@ export default {
   mounted() {
   },
   methods: {
+    send() {
+      this.$axios.post("/appeal", this.form).then(res => {
+        if (res.data == "405") {
+          this.$message({
+            message: '账号未被封禁!',
+            type: 'error'
+          });
+        } else if (res.data == "502") {
+          this.$message({
+            message: '账号或密码错误',
+            type: 'error'
+          });
+        } else {
+          this.$message({
+            message: '申诉已提交',
+            type: 'success'
+          })
+        }
+      })
+    },
+    open() {
+      this.$refs.addData.dialogFormVisible = true;
+    },
     //重置表单
     resetForm() {
       this.$refs.formRef.resetFields();

@@ -13,17 +13,18 @@ var rout = new router({
         path: '/login',
         name: 'login',
         component: login
-    }, {
-        path: '/main',
-        name: 'main',
-        component: main,
-        children: [{
-            path: "/userlist",
-            component: userlist
-        },
-            {
-                path: "/entlist",
-                component: entlist
+    },
+        {
+            path: '/main',
+            name: 'main',
+            component: main,
+            children: [{
+                path: "/userlist",
+                component: userlist
+            },
+                {
+                    path: "/entlist",
+                    component: entlist
             },
             {
                 path: "/enttypelist",
