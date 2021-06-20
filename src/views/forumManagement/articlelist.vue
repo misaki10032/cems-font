@@ -46,7 +46,7 @@ export default {
       tableData: [],
       pageInfo: {
         total: 10,
-        currentPage: 4,
+        currentPage: 1,
         pageNum: 1,
         pageSize: 10
       },

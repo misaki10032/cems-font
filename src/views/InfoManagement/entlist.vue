@@ -50,7 +50,7 @@ export default {
       tableData: [],
       pageInfo: {
         total: 10,
-        currentPage: 4,
+        currentPage: 1,
         pageNum: 1,
         pageSize: 8
       },
@@ -131,30 +131,6 @@ export default {
         });
       });
     },
-    //   this.$axios.get("/updataEntState/", {
-    //     params: {
-    //       rowid,
-    //       rowstatus
-    //     }
-    //   }).then(res => {
-    //     if (res.data != "0") {
-    //       row.entState = res.data
-    //     } else {
-    //       this.$message({
-    //         message: '服务器异常',
-    //         type: 'error'
-    //       });
-    //     }
-    //   }).catch((err) => {
-    //     this.$message({
-    //       message: '服务器异常' + err,
-    //       type: 'error'
-    //     });
-    //   });
-    //   console.log(row.id + "===row.id")
-    // },
-
-
     formatDate(row, column, cellValue) {
       console.log(cellValue)
       let date = new Date(cellValue);

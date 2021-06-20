@@ -7,6 +7,7 @@ import main from "../views/main.vue";
 import enttypelist from "../views/InfoManagement/enttypelist.vue"
 import articlelist from "../views/forumManagement/articlelist.vue";
 import commentlist from "../views/forumManagement/commentlist.vue";
+import replylist from "../views/forumManagement/replylist.vue";
 // import App from "../App.vue";
 
 Vue.use(router)
@@ -39,6 +40,11 @@ var rout = new router({
                 path: "/commentlist",
                 component: commentlist
             },
+            {
+                path: "/replylist",
+                name: "replylist",
+                component: replylist
+            }
         ]
     }, {
         path: "/",
