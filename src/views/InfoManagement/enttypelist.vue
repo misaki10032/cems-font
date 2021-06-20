@@ -64,6 +64,7 @@ export default {
           this.$message({
             message: str + '<-删除成功->',
             type: 'success'
+
           });
           // this.sleep(1000)
           // //刷新页面
