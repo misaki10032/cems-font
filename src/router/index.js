@@ -10,7 +10,7 @@ import commentlist from "../views/forumManagement/commentlist.vue";
 import replylist from "../views/forumManagement/replylist.vue";
 import entTypeEchart from "../views/InfoManagement/Echart/entTypeEchart.vue"
 import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
-
+import adminappeal from "@/views/admin/appeal/adminappeal";
 // import App from "../App.vue";
 
 Vue.use(router)
@@ -31,35 +31,39 @@ var rout = new router({
                 {
                     path: "/entlist",
                     component: entlist
-            },
-            {
-                path: "/enttypelist",
-                component: enttypelist
-            },{
-                path: "/entTypeEchart",
-                component: entTypeEchart
-            },{
-                path: "/entListEchart",
-                component: entListEchart
-            },
-            {
-                path: "/articlelist",
-                component: articlelist
-            },
-            {
-                path: "/commentlist",
-                component: commentlist
-            },
-            {
-                path: "/replylist",
-                name: "replylist",
-                component: replylist
-            }
-        ]
-    }, {
-        path: "/",
-        redirect: '/main'
-    }]
+                },
+                {
+                    path: "/enttypelist",
+                    component: enttypelist
+                }, {
+                    path: "/entTypeEchart",
+                    component: entTypeEchart
+                }, {
+                    path: "/entListEchart",
+                    component: entListEchart
+                },
+                {
+                    path: "/articlelist",
+                    component: articlelist
+                },
+                {
+                    path: "/commentlist",
+                    component: commentlist
+                },
+                {
+                    path: "/replylist",
+                    name: "replylist",
+                    component: replylist
+                }, {
+                    path: '/adminappeal',
+                    name: 'adminappeal',
+                    component: adminappeal
+                }
+            ]
+        }, {
+            path: "/",
+            redirect: '/main'
+        }]
 })
 
 export default rout;

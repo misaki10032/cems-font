@@ -106,7 +106,6 @@ export default {
     var checkPhone = (rule, value, callback) => {
       const regPass = /^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[1,7]))\d{8}$/
       if (value === '') {
-        alert("111")
         callback(new Error('请输入手机号'));
       } else if (!regPass.test(value)) {
         callback(new Error('请输入正确的手机号'));
