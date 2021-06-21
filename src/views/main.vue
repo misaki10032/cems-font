@@ -89,7 +89,6 @@ export default {
     },
     logOut() {
       sessionStorage.clear();
-      alert("点击了退出")
       this.$router.push("/login");
     }
   }
