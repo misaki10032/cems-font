@@ -36,13 +36,13 @@
 
       <el-container>
         <el-header style="text-align: right; font-size: 16px;height: 61px;">
-          <el-menu active-text-color="#15087c" background-color="#06baec"
+          <el-menu active-text-color="#15087c" background-color="#06baec" router
                    class="el-menu-demo" mode="horizontal" text-color="#fff" @select="handleSelect">
             <el-menu-item index="1">处理中心</el-menu-item>
             <el-submenu index="2">
               <template slot="title">管理员管理</template>
               <el-menu-item index="2-1">管理员信息</el-menu-item>
-              <el-menu-item index="2-2">管理员申诉</el-menu-item>
+              <el-menu-item index="/adminappeal">管理员申诉</el-menu-item>
               <el-menu-item index="2-3">管理员升级请求</el-menu-item>
               <el-menu-item index="2-4">管理员绩效</el-menu-item>
               <el-submenu index="2-4">
@@ -75,7 +75,6 @@
     </el-container>
   </div>
 </template>
-
 <script>
 export default {
   data() {
