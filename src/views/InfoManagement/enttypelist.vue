@@ -64,7 +64,7 @@ export default {
     },
 
     handleEdit(index, row) {
-      alert("查看-" + row.id + "-类型")
+      this.$router.push({name: 'byEentyToenTlist', params: {id: row.id}})
     },
 
     //验证需要添加的类型
