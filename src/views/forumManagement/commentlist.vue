@@ -62,7 +62,11 @@ export default {
       this.$router.push({name: 'replylist', params: {id: row.id}})
     },
     handleDelete(index, row) {
-      alert("删除-" + row.id + "-类型")
+      console.log(row.id)
+      this.$message({
+        message: '删你🐎呢,这个按钮没用',
+        type: 'error'
+      })
     },
     findCommlist(page, limit) {
       var that = this;
