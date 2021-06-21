@@ -220,7 +220,8 @@ export default {
                   this.$message({
                     message: '注册成功',
                     type: 'success'
-                  })
+                  });
+                  this.dialogFormVisible1 = false;
                 } else if (res.data == "401") {
                   this.$message({
                     message: '账号已存在!',
