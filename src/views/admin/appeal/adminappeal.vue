@@ -42,7 +42,7 @@ export default {
       this.$axios.get("/ShenSuOk/" + row.id + "/" + row.adminNum).then(res => {
         console.log(res.data)
         this.$message({
-          message: '删除成功',
+          message: '审核通过',
           type: 'success'
         })
         this.findEntList(1, this.pageInfo.pageSize);

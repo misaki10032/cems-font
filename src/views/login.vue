@@ -265,7 +265,8 @@ export default {
               this.$message({
                 message: '申诉已提交',
                 type: 'success'
-              })
+              });
+              this.dialogFormVisible = false
             }
           })
         } else {
