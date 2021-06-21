@@ -10,6 +10,7 @@ import commentlist from "../views/forumManagement/commentlist.vue";
 import replylist from "../views/forumManagement/replylist.vue";
 import entTypeEchart from "../views/InfoManagement/Echart/entTypeEchart.vue"
 import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
+import  byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
 
 // import App from "../App.vue";
 
@@ -53,6 +54,11 @@ var rout = new router({
                 path: "/replylist",
                 name: "replylist",
                 component: replylist
+            },
+            {
+                path: "/byEentyToenTlist",
+                name: "byEentyToenTlist",
+                component: byEentyToenTlist
             }
         ]
     }, {
