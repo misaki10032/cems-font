@@ -98,8 +98,6 @@ export default {
       }
     },
     goback() {
-      //返回上一页
-      // this.$router.push("/commentlist")
       this.$router.go(-1)
     }
   }

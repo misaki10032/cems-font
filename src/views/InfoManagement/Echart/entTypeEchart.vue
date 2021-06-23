@@ -11,7 +11,6 @@
     </el-row>
   </div>
 </template>
-
 <script>
 var echarts = require('echarts');
 export default {

@@ -9,27 +9,22 @@
     </el-row>
   </div>
 </template>
-
 <script>
 var echarts = require('echarts');
 export default {
   name: "addType",
   methods: {
     gotolink() {
-      //点击跳转至上次浏览页面
-      // this.$router.go(-1)
-      //指定跳转地址
       this.$router.replace('/entlist')
     }
   },
-
   mounted() {
     this.$axios.get('/entrustEchart').then((res) => {
           var option = echarts.init(document.getElementById('charts'));
           option.setOption({
             tooltip: {
               trigger: 'item',
-              formatter: '{a} <br/>{b}: {c} ({d}%)'
+              formatter: '{a} </br><hr>{b}: {c} ({d}%)'
             },
             legend: {
               data: res.data.EntPlanName
@@ -99,12 +94,5 @@ export default {
         }
     );
   }
-
 }
-
-
 </script>
-
-<style scoped>
-
-</style>

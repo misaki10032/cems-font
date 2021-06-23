@@ -74,46 +74,46 @@ export default {
       this.$axios.post("/verifyAddEntType", this.form).then((res) => {
         if (res.data == "ok") {
           that.$message({
-            message: str + '<-可以插入->',
+            message: str + '验证成功',
             type: 'success'
           });
         } else {
           that.$message({
-            message: str + '<-有重复--不可插入->',
-            type: 'warning'
+            message: str + '数据异常',
+            type: 'error'
           });
         }
       })
     },
-    //添加的类型
+
     addEntType() {
       var str = this.form.entType;
       var that = this;
       this.$axios.post("/addEntType", this.form).then((res) => {
         if (res.data == "ok") {
           that.$message({
-            message: str + '<-可以成功->',
+            message: str + ',添加成功!',
             type: 'success'
           });
           this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize)
         } else if (res.data == "no") {
           that.$message({
-            message: str + '<-重复-插入失败->',
+            message: str + '添加失败,请重试!',
             type: 'warning'
           });
         }else {
           this.$message({
-            type: 'info',
-            message: '未知错误'
+            type: 'error',
+            message: '未知错误!!'
           });
         }
       })
     },
 
     handleDelete(index, row) {
-      var str = "<<"+row.entType + ">>  数量为:" + row.entTypeNum + "  "
+      var str = row.entType + "数量为:" + row.entTypeNum
       if (row.entTypeNum === 0) {
-        this.$confirm('此操作将永久删除该<<'+row.entType+'>>委托类型, 是否继续?', '提示', {
+        this.$confirm('此操作将永久删除该' + row.entType + '委托类型, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
@@ -122,31 +122,24 @@ export default {
           //删除数据
           this.handleDeleteById(index, row)
           this.$message({
-            message: str + '<-删除成功->',
+            message: str + '删除成功!',
             type: 'success'
           });
 
         })
       } else {
         this.$message({
-          message: str + '<-不可删除->',
+          message: str + '不可删除!!',
           type: 'error'
         });
       }
     },
-
-
     handleDeleteById(index, row) {
-      console.log("删除-" + row.id + "-类型")
       this.$axios.get("/handleDeleteById/" + row.id).then(function () {
-        console.log("正在删除_")
       })
      this.tableData.splice(index, 1);
     },
-
-
     formatDate(row, column, cellValue) {
-      console.log(cellValue)
       let date = new Date(cellValue);
       return date.toLocaleString();
     },
@@ -163,12 +156,10 @@ export default {
     handleSizeChange(val) {
       this.pageInfo.pageSize = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前: ${val}每页');
     },
     handleCurrentChange(val) {
       this.pageInfo.pageNum = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前页: ${this.pageInfo.pageNum}');
     }
   }
 }

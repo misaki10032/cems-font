@@ -126,19 +126,17 @@ export default {
     handleSizeChange(val) {
       this.pageInfo.pageSize = val;
       this.findUserList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前: ${val}每页');
     },
     handleCurrentChange(val) {
       this.pageInfo.pageNum = val;
       this.findUserList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前页: ${this.pageInfo.pageNum}');
     },
     onSubmit() {
       this.formInline.pageNum = this.pageInfo.pageNum;
       this.formInline.pageSize = this.pageInfo.pageSize;
       if (this.formInline.region == null || this.formInline.region == "") {
         this.$message({
-          message: '状态为空',
+          message: '状态为空!',
           type: 'error'
         });
       } else {

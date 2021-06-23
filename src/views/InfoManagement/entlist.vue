@@ -103,7 +103,6 @@ export default {
         }
       });
     },
-
     handleDelete(index, row) {
       this.$confirm('是否终止该任务?', '提示', {
         confirmButtonText: '确定',
@@ -111,9 +110,7 @@ export default {
         type: 'warning',
         center: true
       }).then(() => {
-        //调用删除委托函数
         this.handleDelete1(index, row)
-
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -121,8 +118,6 @@ export default {
         });
       });
     },
-
-
     handleEdit(index, row) {
       this.$confirm('是否修改其委托状态?', '提示', {
         confirmButtonText: '确定',
@@ -132,7 +127,6 @@ export default {
       }).then(() => {
         this.updataEntState(index, row),
             this.$message({
-
               type: 'success',
               message: '修改成功!'
             });
@@ -144,7 +138,6 @@ export default {
       });
     },
     formatDate(row, column, cellValue) {
-      console.log(cellValue)
       let date = new Date(cellValue);
       return date.toLocaleString();
     },
@@ -163,16 +156,12 @@ export default {
     handleSizeChange(val) {
       this.pageInfo.pageSize = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前: ${val}每页');
     }
     ,
     handleCurrentChange(val) {
       this.pageInfo.pageNum = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-      console.log('当前页: ${this.pageInfo.pageNum}');
     },
-
-    //更该委托的状态
     updataEntState(index, row) {
       var rowid = row.id
       var rowstatus = row.entState
@@ -196,7 +185,6 @@ export default {
           type: 'error'
         });
       });
-      console.log(row.id + "===row.id")
     },
 
   }
