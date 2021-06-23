@@ -315,7 +315,11 @@ export default {
           });
           var adminName = res.data.adminName;
           var adminToken = res.data.adminToken;
+          var adminLevel = res.data.adminLevel;
+          var adminId = res.data.adminId;
           window.sessionStorage.setItem("num", adminName);
+          window.sessionStorage.setItem("level", adminLevel);
+          window.sessionStorage.setItem("id", adminId);
           window.sessionStorage.setItem("token", adminToken);
           this.$router.push("/main");
         }
