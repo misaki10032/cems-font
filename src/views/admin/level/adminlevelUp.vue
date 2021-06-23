@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form ref="ruleForm" :model="ruleForm" :rules="rules" class="demo-ruleForm" label-width="80px">
-      <el-form-item label="账号" prop="adminNum">
+      <el-form-item label="自身账号" prop="adminNum">
         <el-input v-model="ruleForm.adminNum"></el-input>
       </el-form-item>
       <el-form-item label="目标职位" prop="target">

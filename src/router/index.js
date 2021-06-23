@@ -13,6 +13,7 @@ import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
 import adminappeal from "@/views/admin/appeal/adminappeal";
 import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
 import adminlevelUp from "../views/admin/level/adminlevelUp.vue"
+import adminlist from "../views/admin/adminlist.vue";
 
 // import App from "../App.vue";
 
@@ -69,6 +70,9 @@ var rout = new router({
                 path: '/adminlevelUp',
                 name: 'adminlevelUp',
                 component: adminlevelUp
+            }, {
+                path: '/adminlist',
+                component: adminlist
             }
         ]
     }, {
