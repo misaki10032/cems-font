@@ -11,7 +11,8 @@ import replylist from "../views/forumManagement/replylist.vue";
 import entTypeEchart from "../views/InfoManagement/Echart/entTypeEchart.vue"
 import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
 import adminappeal from "@/views/admin/appeal/adminappeal";
-import  byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
+import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
+import adminLevelManagement from "@/views/admin/Management/adminLevelManagement";
 
 // import App from "../App.vue";
 
@@ -64,6 +65,10 @@ var rout = new router({
                 path: '/adminappeal',
                 name: 'adminappeal',
                 component: adminappeal
+            }, {
+                path: '/adminLevelManagement',
+                name: 'adminLevelManagement',
+                component: adminLevelManagement
             }
         ]
     }, {
