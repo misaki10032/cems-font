@@ -14,6 +14,8 @@ import adminappeal from "@/views/admin/appeal/adminappeal";
 import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
 import adminlevelUp from "../views/admin/level/adminlevelUp.vue"
 import adminlist from "../views/admin/adminlist.vue";
+import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
+import adminLevelManagement from "@/views/admin/Management/adminLevelManagement";
 
 // import App from "../App.vue";
 
@@ -73,6 +75,10 @@ var rout = new router({
             }, {
                 path: '/adminlist',
                 component: adminlist
+            }, {
+                path: '/adminLevelManagement',
+                name: 'adminLevelManagement',
+                component: adminLevelManagement
             }
         ]
     }, {

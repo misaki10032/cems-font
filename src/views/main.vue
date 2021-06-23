@@ -43,7 +43,7 @@
               <template slot="title">管理员管理</template>
               <el-menu-item index="/adminlist">管理员信息</el-menu-item>
               <el-menu-item index="/adminappeal">管理员申诉</el-menu-item>
-              <el-menu-item index="2-3">管理员升级请求</el-menu-item>
+              <el-menu-item index="/adminLevelManagement">管理员升级请求</el-menu-item>
               <el-menu-item index="2-4">管理员绩效</el-menu-item>
               <el-submenu index="2-4">
                 <template slot="title">选项4</template>
