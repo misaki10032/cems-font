@@ -45,12 +45,6 @@
               <el-menu-item index="/adminappeal">管理员申诉</el-menu-item>
               <el-menu-item index="/adminLevelManagement">管理员升级请求</el-menu-item>
               <el-menu-item index="2-4">管理员绩效</el-menu-item>
-              <el-submenu index="2-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="2-4-1">选项1</el-menu-item>
-                <el-menu-item index="2-4-2">选项2</el-menu-item>
-                <el-menu-item index="2-4-3">选项3</el-menu-item>
-              </el-submenu>
             </el-submenu>
             <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
             <el-tooltip class="item" content="退出登录" effect="dark" placement="bottom">

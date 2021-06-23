@@ -56,11 +56,6 @@ export default {
         }
       }).then(res => {
         console.log(res.data)
-        /*        this.$message({
-                  message: '审核通过',
-                  type: 'success'
-                })*/
-        //this.findEntList(1, this.pageInfo.pageSize);
       })
     },
 
