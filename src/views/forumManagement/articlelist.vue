@@ -66,6 +66,8 @@ export default {
   methods: {
     shua() {
       this.sel = "all";
+      this.formArticle.title = "";
+      this.formArticle.status = "";
       this.findArtList(1, this.pageInfo.pageSize);
     },
     handleEdit(index, row) {

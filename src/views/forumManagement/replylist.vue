@@ -60,6 +60,8 @@ export default {
   methods: {
     shua() {
       this.sel = "all";
+      this.formInline.user = this.$route.params.id;
+      this.formInline.region = "";
       this.findCommlist(1, this.pageInfo.pageSize);
     },
     formatDate(row, column, cellValue) {
