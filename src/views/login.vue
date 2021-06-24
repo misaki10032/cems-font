@@ -21,8 +21,12 @@
 
         <el-form-item class="btn_box">
           <el-button type="primary" @click="login">登录</el-button>
-          <el-button type="info" @click="dialogFormVisible1 = true">注册</el-button>
-          <el-button type="info" @click="dialogFormVisible = true">申诉</el-button>
+          <el-button type="success" @click="dialogFormVisible1 = true">注册</el-button>
+        </el-form-item>
+        <el-form-item class="link_box">
+          <el-link style="" type="warning" @click="dialogFormVisible = true">申诉</el-link>
+          <span style="color: #f63f09;margin:0 10px 0 10px ">|</span>
+          <el-link style="" type="danger">忘记密码?</el-link>
         </el-form-item>
       </el-form>
     </div>
@@ -375,6 +379,15 @@ body,
 }
 
 .btn_box {
+  text-align: right;
+  padding-right: 20px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.link_box {
+  margin: 0;
+  padding: 0;
   text-align: right;
   padding-right: 20px;
 }

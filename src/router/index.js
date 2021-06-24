@@ -12,7 +12,7 @@ import entTypeEchart from "../views/InfoManagement/Echart/entTypeEchart.vue"
 import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
 import adminappeal from "@/views/admin/appeal/adminappeal";
 import adminlevelUp from "../views/admin/level/adminlevelUp.vue"
-import adminlist from "../views/admin/adminlist.vue";
+import adminlist from "../views/admin/Management/adminlist.vue";
 import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
 import adminLevelManagement from "@/views/admin/Management/adminLevelManagement";
 

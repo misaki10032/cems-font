@@ -47,21 +47,23 @@
               <el-menu-item index="2-4">管理员绩效</el-menu-item>
             </el-submenu>
             <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-            <el-tooltip class="item" content="退出登录" effect="dark" placement="bottom">
-              <el-button circle icon="el-icon-s-release" style="margin-right:20px " type="primary"
-                         @click="logOut"></el-button>
-            </el-tooltip>
-            <span style="color: white;"><i class="el-icon-user-solid"></i>&nbsp;&nbsp;{{ num }}</span>
+            <span style="color: white;"><i class="el-icon-user-solid"></i>{{ num }}</span>
             <el-dropdown style="margin-left: 20px;">
-              <i class="el-icon-s-operation" style="margin-right: 15px;color: white;"></i>
+              <el-button circle icon="el-icon-s-operation" type="primary"></el-button>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>个人空间</el-dropdown-item>
                 <router-link :class="{levelInsufficient:!isRoot}" style="text-decoration:none" to="/adminlevelUp">
                   <el-dropdown-item>升级申请</el-dropdown-item>
                 </router-link>
-                <el-dropdown-item>修改密码</el-dropdown-item>
+                <span @click="logOut">
+                  <el-dropdown-item>退出登录</el-dropdown-item>
+                </span>
               </el-dropdown-menu>
             </el-dropdown>
+            <el-tooltip class="item" content="退出登录" effect="dark" placement="bottom">
+              <el-button circle icon="el-icon-s-release" style="margin-left:20px " type="primary"
+                         @click="logOut"></el-button>
+            </el-tooltip>
           </el-menu>
         </el-header>
         <el-main style="height: 600px;">
