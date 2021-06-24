@@ -1,5 +1,24 @@
 <template>
   <div>
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+      <el-form-item label="状态">
+        <el-select v-model="formInline.region" placeholder="状态">
+          <el-option label="未处理" value="未处理"></el-option>
+          <el-option label="已处理" value="已处理"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-popconfirm
+            cancel-button-text="取消"
+            confirm-button-text="确定"
+            title="确定删除吗？"
+            @confirm="onsub"
+        >
+          <el-button slot="reference" plain type="danger">清空</el-button>
+        </el-popconfirm>
+
+      </el-form-item>
+    </el-form>
     <el-table :data="tableData" style="width: 100%;">
       <el-table-column fixed label="ID" prop="id" sortable width="100"></el-table-column>
       <el-table-column label="用户Id" prop="adminId" width="100"></el-table-column>
@@ -30,6 +49,9 @@
 export default {
   data() {
     return {
+      formInline: {
+        region: ""
+      },
       tableData: [],
       pageInfo: {
         total: 10,
@@ -46,6 +68,27 @@ export default {
     this.findEntList(1, this.pageInfo.pageSize);
   },
   methods: {
+    onsub() {
+      var status = this.formInline.region;
+      if (status.length == 0) {
+        this.$message({
+          message: "请选择状态",
+          type: 'error'
+        });
+        return false;
+      }
+      this.$axios.get("/delAllUp", {
+        params: {
+          status
+        }
+      }).then(res => {
+        this.$message({
+          message: res.data,
+          type: 'success'
+        });
+        this.findEntList(1, this.pageInfo.pageSize);
+      })
+    },
     change(index, row) {
       var id = row.id
       var status = row.status

@@ -26,7 +26,7 @@
         <el-form-item class="link_box">
           <el-link style="" type="warning" @click="dialogFormVisible = true">申诉</el-link>
           <span style="color: #f63f09;margin:0 10px 0 10px ">|</span>
-          <el-link style="" type="danger">忘记密码?</el-link>
+          <el-link style="" type="danger" @click="dialogFormVisible2 = true">忘记密码?</el-link>
         </el-form-item>
       </el-form>
     </div>
@@ -72,6 +72,39 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    <el-dialog :visible.sync="dialogFormVisible2" title="忘记密码">
+      <el-form ref="form2" :model="form2" :rules="form2Rules">
+        <el-form-item :label-width="formLabelWidth" label="账号" prop="acc">
+          <el-input v-model="form2.acc" autocomplete="off" placeholder="请输入账号"></el-input>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="邮箱" prop="email">
+          <el-input v-model="form2.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
+        </el-form-item>
+        <el-form-item v-show="bol1" :label-width="formLabelWidth" label="验证码" prop="code">
+          <el-input v-model="form2.code" autocomplete="off" placeholder="请输入验证码"></el-input>
+          <!--          <el-button type="primary" size="small"  :disabled="disable" :class="{ codeGeting:isGeting }" @click="getVerifyCode">
+                      {{ getCode }}
+                    </el-button>-->
+        </el-form-item>
+        <el-form-item v-show="bol1" :label-width="formLabelWidth">
+          <el-button :class="{ codeGeting:isGeting }" :disabled="disable" size="small" type="primary"
+                     @click="getVerifyCode">
+            {{ getCode }}
+          </el-button>
+        </el-form-item>
+        <el-form-item v-show="bol2" :label-width="formLabelWidth" label="新密码" prop="newPsw">
+          <el-input v-model="form2.newPsw" autocomplete="off" placeholder="请输入密码" type="password"></el-input>
+        </el-form-item>
+        <el-form-item v-show="bol2" :label-width="formLabelWidth" label="确认密码" prop="newPsw1">
+          <el-input v-model="form2.newPsw1" autocomplete="off" placeholder="再次输入密码" type="password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+          <el-button type="primary" @click="send1('form2')">提交</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 
 </template>
@@ -91,7 +124,7 @@ export default {
     var checkPsw2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
-      } else if (value !== this.form1.psw) {
+      } else if (value !== this.form2.newPsw) {
         callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
@@ -107,6 +140,21 @@ export default {
         callback();
       }
     }
+    var checkEmail1 = (rule, value, callback) => {
+      const regPass = /^[0-9a-zA-Z_.-]+[@][0-9a-zA-Z_.-]+([.][a-zA-Z]+){1,2}$/
+      if (value === '') {
+        callback(new Error('请输入邮箱'));
+        this.bol1 = false;
+      } else if (!regPass.test(value)) {
+        callback(new Error('请输入正确的邮箱'));
+        this.bol1 = false;
+      } else if (value == "" || this.form2.acc == "") {
+        callback(new Error('请输入账号或邮箱'));
+      } else {
+        this.bol1 = true;
+        callback();
+      }
+    }
     var checkPhone = (rule, value, callback) => {
       const regPass = /^((1[3,5,8,7,9][0-9])|(14[5,7])|(17[0,6,7,8])|(19[1,7]))\d{8}$/
       if (value === '') {
@@ -114,6 +162,25 @@ export default {
       } else if (!regPass.test(value)) {
         callback(new Error('请输入正确的手机号'));
       } else {
+        callback();
+      }
+    };
+    var checkAcc1 = (rule, value, callback) => {
+      var nu = /^\d{1,}$/;
+      if (value === '') {
+        this.bol1 = false
+        callback(new Error('请输入账号'));
+      } else if (nu.test(value)) {
+        this.bol1 = false
+        callback(new Error('账号不能为纯数字'));
+      } else if (value.length > 15) {
+        this.bol1 = false
+        callback(new Error('账号过长!'));
+      } else if (value == "" || this.form2.email == "") {
+        this.bol1 = false
+        callback(new Error('请输入账号或邮箱'))
+      } else {
+        this.bol1 = true
         callback();
       }
     };
@@ -136,15 +203,35 @@ export default {
         callback();
       }
     };
+    var checkCode = (rule, value, callback) => {
+      if (value === '') {
+        this.bol2 = false;
+        callback(new Error('请输入验证码'));
+      } else if (value === this.infomation) {
+        this.bol2 = true;
+        callback();
+      } else {
+        this.bol2 = false;
+        callback(new Error('验证码错误'));
+      }
+    }
     return {
+      getCode: '获取验证码',
+      isGeting: false,
+      count: 6,
+      disable: false,
+      bol1: false,
+      bol2: false,
+      infomation: "",
       form: {
         phone: "",
         desc: "",
         psw: ""
       },
-      formLabelWidth: "60px",
+      formLabelWidth: "70px",
       dialogFormVisible: false,
       dialogFormVisible1: false,
+      dialogFormVisible2: false,
       userlist: {},
       form1: {
         acc: "",
@@ -152,6 +239,29 @@ export default {
         psw2: "",
         phoneTwo: "",
         email: ""
+      },
+      form2: {
+        acc: "",
+        email: "",
+        code: "",
+        newPsw: "",
+        newPsw1: ""
+      },
+      form2Rules: {
+        acc: [
+          {validator: checkAcc1, trigger: 'blur'}
+        ],
+        newPsw: [
+          {validator: checkPsw, trigger: 'blur'}
+        ],
+        newPsw1: [
+          {validator: checkPsw2, trigger: 'blur'}
+        ],
+        email: [
+          {validator: checkEmail1, trigger: 'blur'}
+        ], code: [
+          {validator: checkCode, trigger: 'blur'}
+        ]
       },
       formRule: {
         phone: [
@@ -216,6 +326,41 @@ export default {
   mounted() {
   },
   methods: {
+    getVerifyCode() {
+      var acc = this.form2.acc;
+      var email = this.form2.email
+      this.$axios.get("forgetPsw", {
+        params: {
+          acc, email
+        }
+      }).then(res => {
+        if (res.data == '203') {
+          this.$message({
+            message: "账号或邮箱错误",
+            type: 'error'
+          });
+        } else {
+          this.$message({
+            message: "发送成功",
+            type: 'success'
+          });
+          this.infomation = res.data;
+          var countDown = setInterval(() => {
+            if (this.count < 1) {
+              this.isGeting = false;
+              this.disable = false;
+              this.getCode = '获取验证码';
+              this.count = 60;
+              clearInterval(countDown);
+            } else {
+              this.isGeting = true;
+              this.disable = true;
+              this.getCode = this.count-- + 's后重发';
+            }
+          }, 1000);
+        }
+      })
+    },
     subForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -244,10 +389,21 @@ export default {
                 }
               }
           )
-
         } else {
           console.log('error submit!!');
           return false;
+        }
+      });
+    },
+    send1(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post("/forgetPswOk", this.form2).then(res => {
+            this.$message({
+              message: res.data,
+              type: 'success'
+            });
+          })
         }
       });
     },
@@ -398,5 +554,10 @@ body,
   width: 100%;
   padding: 0px 20px;
   box-sizing: border-box;
+}
+
+.codeGeting {
+  background: #cdcdcd;
+  border-color: #cdcdcd;
 }
 </style>
