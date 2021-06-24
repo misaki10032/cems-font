@@ -46,7 +46,6 @@
               <el-menu-item index="/adminLevelManagement">管理员升级请求</el-menu-item>
               <el-menu-item index="2-4">管理员绩效</el-menu-item>
             </el-submenu>
-            <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
             <span style="color: white;"><i class="el-icon-user-solid"></i>{{ num }}</span>
             <el-dropdown style="margin-left: 20px;">
               <el-button circle icon="el-icon-s-operation" type="primary"></el-button>
