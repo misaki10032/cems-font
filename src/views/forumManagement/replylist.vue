@@ -59,8 +59,8 @@ export default {
   },
   methods: {
     shua() {
-      this.findCommlist(1, this.pageInfo.pageSize);
       this.sel = "all";
+      this.findCommlist(1, this.pageInfo.pageSize);
     },
     formatDate(row, column, cellValue) {
       console.log(cellValue)
