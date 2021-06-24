@@ -12,6 +12,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="danger" @click="shua">重置</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" style="width: 100%;">
@@ -73,6 +74,12 @@ export default {
     this.findUserList(1, this.pageInfo.pageSize);
   },
   methods: {
+    shua() {
+      this.formInline.user = "";
+      this.formInline.region = "";
+      this.sel = "all";
+      this.findUserList(1, this.pageInfo.pageSize);
+    },
     formatRole(row, column, cellValue) {
       var newValue = cellValue == "complete" ? "委托人" : "代理人";
       return newValue;
