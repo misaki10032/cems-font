@@ -69,8 +69,16 @@ export default {
 
     //验证需要添加的类型
     verifyAddEntType() {
+      var tes = /^\s*$/;
       var str = this.form.entType;
       var that = this;
+      if (tes.test(str)) {
+        that.$message({
+          message: '不能包含空格',
+          type: 'error'
+        });
+        return false;
+      }
       this.$axios.post("/verifyAddEntType", this.form).then((res) => {
         if (res.data == "ok") {
           that.$message({
