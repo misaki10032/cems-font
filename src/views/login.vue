@@ -49,7 +49,7 @@
           <el-input v-model="form1.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button @click=" dialogFormVisible1=false">取 消</el-button>
+          <el-button @click="dialogFormVisible1=false">取 消</el-button>
           <el-button type="primary" @click="subForm('form1')">确 定</el-button>
         </el-form-item>
       </el-form>
