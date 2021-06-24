@@ -108,21 +108,21 @@ export default {
     onSubmit() {
       this.formInline.pageNum = this.pageInfo.pageNum;
       this.formInline.pageSize = this.pageInfo.pageSize;
-      if (this.formInline.user == null || this.formInline.user == "") {
-        this.$message({
-          message: '条件为空',
-          type: 'error'
-        });
-      } else {
-        this.sel = "sub"
-        this.$axios.post("/getCommLike", this.formInline).then(res => {
-          if (res.data.code != "500") {
-            this.tableData = res.data.data;
-            this.total = res.data.total;
-            this.pageInfo.total = res.data.total;
-          }
-        })
-      }
+      /*     if (this.formInline.user == null || this.formInline.user == "") {
+   /*        this.$message({
+               message: '条件为空',
+               type: 'error'
+             });*/
+      /*      } else {*/
+      this.sel = "sub"
+      this.$axios.post("/getCommLike", this.formInline).then(res => {
+        if (res.data.code != "500") {
+          this.tableData = res.data.data;
+          this.total = res.data.total;
+          this.pageInfo.total = res.data.total;
+        }
+      })
+
     }
   }
 }
