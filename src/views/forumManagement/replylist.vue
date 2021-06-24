@@ -7,14 +7,15 @@
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
         <el-button type="success" @click="goback">返回</el-button>
+        <el-button type="danger" @click="shua">重置</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" style="width: 100%;">
       <el-table-column fixed label="评论号" prop="id" sortable width="90"></el-table-column>
-      <el-table-column fixed label="评论人" prop="commUser" width="66"></el-table-column>
-      <el-table-column fixed label="回复人" prop="commReUser" width="66"></el-table-column>
-      <el-table-column fixed label="回复内容" prop="commReData" width="300"></el-table-column>
-      <el-table-column fixed label="回复对象" prop="commReply" width="90"></el-table-column>
+      <el-table-column label="评论人" prop="commUser" width="66"></el-table-column>
+      <el-table-column label="回复人" prop="commReUser" width="66"></el-table-column>
+      <el-table-column label="回复内容" prop="commReData" width="300"></el-table-column>
+      <el-table-column label="回复对象" prop="commReply" width="90"></el-table-column>
       <el-table-column :formatter="formatDate" fixed label="发布日期" prop="gmtCreate" sortable
                        width="200"></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
@@ -57,6 +58,9 @@ export default {
     this.findCommlist(1, this.pageInfo.pageSize);
   },
   methods: {
+    shua() {
+      this.findCommlist(1, this.pageInfo.pageSize);
+    },
     formatDate(row, column, cellValue) {
       console.log(cellValue)
       let date = new Date(cellValue);

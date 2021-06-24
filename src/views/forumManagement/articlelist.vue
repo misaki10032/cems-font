@@ -12,14 +12,15 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
+        <el-button type="danger" @click="shua">重置</el-button>
       </el-form-item>
     </el-form>
     <el-table :data="tableData" style="width: 100%;">
       <el-table-column type="selection" width="55">
       </el-table-column>
       <el-table-column fixed label="ID" prop="id" sortable width="100"></el-table-column>
-      <el-table-column fixed label="用户id" prop="userId" sortable width="100"></el-table-column>
-      <el-table-column fixed label="标题" prop="foTitle" sortable width="200"></el-table-column>
+      <el-table-column label="用户id" prop="userId" sortable width="100"></el-table-column>
+      <el-table-column label="标题" prop="foTitle" sortable width="200"></el-table-column>
       <el-table-column :formatter="formatDate" label="发帖时间" prop="gmtCreate" sortable width="200"></el-table-column>
       <el-table-column label="状态" prop="status" sortable width="200"></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
@@ -63,6 +64,9 @@ export default {
     this.findArtList(1, this.pageInfo.pageSize);
   },
   methods: {
+    shua() {
+      this.findArtList(1, this.pageInfo.pageSize);
+    },
     handleEdit(index, row) {
       var rowid = row.id
       var rowstatus = row.status

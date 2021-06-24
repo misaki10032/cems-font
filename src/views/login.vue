@@ -178,7 +178,6 @@ export default {
         callback(new Error('账号过长!'));
       } else if (value == "" || this.form2.email == "") {
         this.bol1 = false
-        callback(new Error('请输入账号或邮箱'))
       } else {
         this.bol1 = true
         callback();
@@ -218,7 +217,7 @@ export default {
     return {
       getCode: '获取验证码',
       isGeting: false,
-      count: 6,
+      count: 60,
       disable: false,
       bol1: false,
       bol2: false,
@@ -329,6 +328,19 @@ export default {
     getVerifyCode() {
       var acc = this.form2.acc;
       var email = this.form2.email
+      var countDown = setInterval(() => {
+        if (this.count < 1) {
+          this.isGeting = false;
+          this.disable = false;
+          this.getCode = '获取验证码';
+          this.count = 60;
+          clearInterval(countDown);
+        } else {
+          this.isGeting = true;
+          this.disable = true;
+          this.getCode = this.count-- + 's后重发';
+        }
+      }, 1000);
       this.$axios.get("forgetPsw", {
         params: {
           acc, email
@@ -345,19 +357,6 @@ export default {
             type: 'success'
           });
           this.infomation = res.data;
-          var countDown = setInterval(() => {
-            if (this.count < 1) {
-              this.isGeting = false;
-              this.disable = false;
-              this.getCode = '获取验证码';
-              this.count = 60;
-              clearInterval(countDown);
-            } else {
-              this.isGeting = true;
-              this.disable = true;
-              this.getCode = this.count-- + 's后重发';
-            }
-          }, 1000);
         }
       })
     },
@@ -409,6 +408,7 @@ export default {
                 message: res.data,
                 type: 'success'
               });
+              this.dialogFormVisible2 = false;
             }
           })
         }

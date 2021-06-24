@@ -15,10 +15,10 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column fixed label="手机号" prop="adminPhone" width="150"></el-table-column>
-      <el-table-column :formatter="formatDate" fixed label="生日" prop="adminBirth" sortable
+      <el-table-column label="手机号" prop="adminPhone" width="150"></el-table-column>
+      <el-table-column :formatter="formatDate" label="生日" prop="adminBirth" sortable
                        width="250"></el-table-column>
-      <el-table-column :formatter="formatRole" fixed label="权限" prop="adminLevel" sortable width="150">
+      <el-table-column :formatter="formatRole" label="权限" prop="adminLevel" sortable width="150">
       </el-table-column>
       <el-table-column label="状态" prop="adminStatus" sortable width="200"></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
