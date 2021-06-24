@@ -58,6 +58,12 @@
                 <span @click="logOut">
                   <el-dropdown-item>退出登录</el-dropdown-item>
                 </span>
+                <router-link to="meMessage" style="text-decoration: none">
+                  <el-dropdown-item>个人空间</el-dropdown-item>
+                </router-link>
+
+                <el-dropdown-item>升级申请</el-dropdown-item>
+                <el-dropdown-item>修改密码</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
             <el-tooltip class="item" content="退出登录" effect="dark" placement="bottom">
@@ -75,6 +81,7 @@
 </template>
 <script>
 export default {
+
   data() {
     return {
       num: sessionStorage.getItem("num"),
