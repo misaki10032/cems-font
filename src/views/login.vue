@@ -399,10 +399,17 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios.post("/forgetPswOk", this.form2).then(res => {
-            this.$message({
-              message: res.data,
-              type: 'success'
-            });
+            if (res.data == "402") {
+              this.$message({
+                message: "账号或邮箱错误",
+                type: 'error'
+              });
+            } else {
+              this.$message({
+                message: res.data,
+                type: 'success'
+              });
+            }
           })
         }
       });
