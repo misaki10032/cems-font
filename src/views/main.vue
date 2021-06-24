@@ -51,19 +51,15 @@
             <el-dropdown style="margin-left: 20px;">
               <el-button circle icon="el-icon-s-operation" type="primary"></el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>个人空间</el-dropdown-item>
+                <router-link style="text-decoration: none" to="meMessage">
+                  <el-dropdown-item>个人空间</el-dropdown-item>
+                </router-link>
                 <router-link :class="{levelInsufficient:!isRoot}" style="text-decoration:none" to="/adminlevelUp">
                   <el-dropdown-item>升级申请</el-dropdown-item>
                 </router-link>
                 <span @click="logOut">
                   <el-dropdown-item>退出登录</el-dropdown-item>
                 </span>
-                <router-link to="meMessage" style="text-decoration: none">
-                  <el-dropdown-item>个人空间</el-dropdown-item>
-                </router-link>
-
-                <el-dropdown-item>升级申请</el-dropdown-item>
-                <el-dropdown-item>修改密码</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
             <el-tooltip class="item" content="退出登录" effect="dark" placement="bottom">

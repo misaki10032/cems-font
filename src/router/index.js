@@ -15,10 +15,7 @@ import adminlevelUp from "../views/admin/level/adminlevelUp.vue"
 import adminlist from "../views/admin/Management/adminlist.vue";
 import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
 import adminLevelManagement from "@/views/admin/Management/adminLevelManagement";
-import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
 import meMessage from "../views/admin/space/meMessage"
-
-
 Vue.use(router)
 var rout = new router({
     routes: [{
