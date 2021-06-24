@@ -6,7 +6,7 @@
           <div style="height: 21px;text-align: center;padding: 20px 0 20px 0;background-color: #06baec;">
             <h1><i class="el-icon-s-help"></i>后台管理系统</h1>
           </div>
-          <el-submenu index="1">
+          <el-submenu :class="{ levelInsufficient:isSuper}" index="1">
             <template slot="title"><i class="el-icon-message"></i>信息管理</template>
             <el-menu-item-group>
               <template slot="title">用户|委托</template>
@@ -23,8 +23,8 @@
               <el-menu-item index="/commentlist">评论管理</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-submenu index="3">
-            <template slot="title"><i class="el-icon-setting"></i>申诉管理</template>
+          <el-submenu :class="{levelInsufficient:isSuper}" index="3">
+            <template slot="title" class="menu-super"><i class="el-icon-setting"></i>申诉管理</template>
             <el-menu-item-group>
               <template slot="title">申诉</template>
               <el-menu-item index="3-1">用户账号申诉</el-menu-item>
@@ -39,7 +39,7 @@
           <el-menu active-text-color="#15087c" background-color="#06baec" router
                    class="el-menu-demo" mode="horizontal" text-color="#fff" @select="handleSelect">
             <el-menu-item index="1">处理中心</el-menu-item>
-            <el-submenu index="2">
+            <el-submenu :class="{levelInsufficient:isRoot}" index="2">
               <template slot="title">管理员管理</template>
               <el-menu-item index="/adminlist">管理员信息</el-menu-item>
               <el-menu-item index="/adminappeal">管理员申诉</el-menu-item>
@@ -56,7 +56,7 @@
               <i class="el-icon-s-operation" style="margin-right: 15px;color: white;"></i>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>个人空间</el-dropdown-item>
-                <router-link style="text-decoration:none" to="/adminlevelUp">
+                <router-link :class="{levelInsufficient:!isRoot}" style="text-decoration:none" to="/adminlevelUp">
                   <el-dropdown-item>升级申请</el-dropdown-item>
                 </router-link>
                 <el-dropdown-item>修改密码</el-dropdown-item>
@@ -75,7 +75,19 @@
 export default {
   data() {
     return {
-      num: sessionStorage.getItem("num")
+      num: sessionStorage.getItem("num"),
+      isRoot: true,
+      isSuper: true
+    }
+  },
+  mounted() {
+    var level = sessionStorage.getItem("level");
+    if (level == "root") {
+      this.isSuper = false;
+      this.isRoot = false;
+    } else if (level == "super") {
+      this.isSuper = false;
+      this.isRoot = true;
     }
   },
   methods: {
@@ -104,5 +116,9 @@ export default {
 
 .el-aside {
   color: #333;
+}
+
+.levelInsufficient {
+  display: none;
 }
 </style>

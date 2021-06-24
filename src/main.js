@@ -6,10 +6,6 @@ import router from './router'
 import axios from 'axios'
 
 
-// // 引入echarts
-// import echarts from 'echarts';
-// Vue.prototype.$echarts = echarts;
-
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI);
