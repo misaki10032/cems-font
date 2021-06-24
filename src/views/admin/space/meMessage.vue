@@ -40,10 +40,6 @@
               <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
               <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
-            <!--            <el-form-item>-->
-            <!--              <el-button @click="dialogFormVisible = false">取 消</el-button>-->
-            <!--              <el-button type="primary" @click="send1('form')">确 定</el-button>-->
-            <!--            </el-form-item>-->
           </el-form>
         </el-dialog>
 
