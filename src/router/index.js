@@ -11,9 +11,9 @@ import replylist from "../views/forumManagement/replylist.vue";
 import entTypeEchart from "../views/InfoManagement/Echart/entTypeEchart.vue"
 import entListEchart from "../views/InfoManagement/Echart/entListEchart.vue"
 import adminappeal from "@/views/admin/appeal/adminappeal";
-import  byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
+import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
+import meMessage from "../views/admin/space/meMessage"
 
-// import App from "../App.vue";
 
 Vue.use(router)
 var rout = new router({
@@ -36,10 +36,10 @@ var rout = new router({
             {
                 path: "/enttypelist",
                 component: enttypelist
-            },{
+            }, {
                 path: "/entTypeEchart",
                 component: entTypeEchart
-            },{
+            }, {
                 path: "/entListEchart",
                 component: entListEchart
             },
@@ -64,6 +64,10 @@ var rout = new router({
                 path: '/adminappeal',
                 name: 'adminappeal',
                 component: adminappeal
+            }, {
+                path: '/meMessage',
+                name: 'meMessage',
+                component: meMessage
             }
         ]
     }, {
