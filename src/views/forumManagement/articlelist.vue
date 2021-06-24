@@ -66,6 +66,7 @@ export default {
   methods: {
     shua() {
       this.findArtList(1, this.pageInfo.pageSize);
+      this.sel = "all";
     },
     handleEdit(index, row) {
       var rowid = row.id
