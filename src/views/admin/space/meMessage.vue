@@ -20,16 +20,65 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="send()">保存</el-button>
-          <el-button style="margin-left: 10px" type="danger">修改密码</el-button>
+          <el-button style="margin-left: 10px" @click="dialogFormVisible = true">修改密码</el-button>
         </el-form-item>
+
+
+        <el-dialog :visible.sync="dialogFormVisible" title="修改密码">
+          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm">
+            <el-form-item :label-width="formLabelWidth" label="旧密码" prop="psw">
+              <el-input type="password" v-model="ruleForm.psw" autocomplete="off"></el-input>
+            </el-form-item>
+
+            <el-form-item :label-width="formLabelWidth" label="新密码" prop="pass">
+              <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item :label-width="formLabelWidth" label="确认密码" prop="checkPass">
+              <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+              <el-button @click="resetForm('ruleForm')">重置</el-button>
+            </el-form-item>
+            <!--            <el-form-item>-->
+            <!--              <el-button @click="dialogFormVisible = false">取 消</el-button>-->
+            <!--              <el-button type="primary" @click="send1('form')">确 定</el-button>-->
+            <!--            </el-form-item>-->
+          </el-form>
+        </el-dialog>
+
+
       </el-form>
     </el-col>
   </el-row>
+
+
 </template>
 <script>
 export default {
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+        if (this.ruleForm.checkPass !== '') {
+          this.$refs.ruleForm.validateField('checkPass');
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.ruleForm.pass) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
+
     return {
+      formLabelWidth: "100px",
       dialogFormVisible: false,
       num: sessionStorage.getItem("num"),
       form: {
@@ -39,6 +88,12 @@ export default {
         adminBirth: '',
         adminEmail: '',
         adminHouse: ''
+      },
+      ruleForm: {
+        phone: sessionStorage.getItem("num"),
+        psw: '',
+        pass: '',
+        checkPass: '',
       },
       rules: {
         adminPhone: [
@@ -50,12 +105,20 @@ export default {
           {
             type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']
           }
+        ],
+        pass: [
+          {validator: validatePass, trigger: 'blur'}
+        ],
+        checkPass: [
+          {validator: validatePass2, trigger: 'blur'}
         ]
+
       }
     }
 
   },
   methods: {
+
     send() {
       var that = this;
       this.$axios.post("/updateAdminByNum/", this.form).then(function (res) {
@@ -77,6 +140,37 @@ export default {
           });
         }
       })
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$axios.post("/changePassword", this.ruleForm).then(res => {
+            if (res.data == "502") {
+              this.$message({
+                message: '密码错误,请重新输入',
+                type: 'error'
+              });
+              this.resetForm(formName);
+            } else {
+              this.$message({
+                message: '密码修改成功,请重新登录',
+                type: 'success'
+              });
+                sessionStorage.clear();
+                this.$router.push("/login");
+            }
+          })
+        } else {
+          this.$message({
+            message: '请更改错误',
+            type: 'success'
+          })
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     }
   },
   created() {
