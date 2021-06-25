@@ -46,9 +46,12 @@
               <el-menu-item index="/adminLevelManagement">管理员升级请求</el-menu-item>
               <el-menu-item index="2-4">管理员绩效</el-menu-item>
             </el-submenu>
-            <span style="color: white;"><i class="el-icon-user-solid"></i>{{ num }}</span>
             <el-dropdown style="margin-left: 20px;">
-              <el-button circle icon="el-icon-s-operation" type="primary"></el-button>
+              <el-button round type="primary">
+                <i class="el-icon-user-solid"></i>
+                <span style="color: white;margin:0 10px 0 5px">{{ num }}</span>
+                <i class="el-icon-s-operation"></i>
+              </el-button>
               <el-dropdown-menu slot="dropdown">
                 <router-link style="text-decoration: none" to="meMessage">
                   <el-dropdown-item>个人空间</el-dropdown-item>
