@@ -1,7 +1,6 @@
 <template>
   <div>
     <el-button @click="gotolink" class="btn btn-success"  plain>图形</el-button>
-
     <el-button type="success" @click="dialogFormVisible = true" plain>添加类型</el-button>
     <el-dialog title="添加类型" :visible.sync="dialogFormVisible">
       <el-form :model="form">

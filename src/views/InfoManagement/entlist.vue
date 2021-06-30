@@ -17,7 +17,7 @@
       </el-table-column>
       <el-table-column label="代理人" v-model="form.entAgent" prop="entAgent" width="70"></el-table-column>
       <el-table-column label="完成情况" v-model="form.entPlan" prop="entPlan" width="150"></el-table-column>
-      <el-table-column label="发布时间" prop="gmtCreate" width="200"></el-table-column>
+      <el-table-column :formatter="formatDate" label="发布时间" prop="gmtCreate" width="200"></el-table-column>
       <el-table-column :formatter="formatDate" :sortable="true" label="完成期限" prop="gmtEnd"
                        width="200"></el-table-column>
       <el-table-column label="成交价格" v-model="form.entMoney" prop="entMoney" width="150">
@@ -156,8 +156,7 @@ export default {
     handleSizeChange(val) {
       this.pageInfo.pageSize = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);
-    }
-    ,
+    },
     handleCurrentChange(val) {
       this.pageInfo.pageNum = val;
       this.findEntList(this.pageInfo.pageNum, this.pageInfo.pageSize);

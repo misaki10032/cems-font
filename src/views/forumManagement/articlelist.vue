@@ -7,7 +7,7 @@
       <el-form-item label="状态">
         <el-select v-model="formArticle.status" placeholder="状态">
           <el-option label="已审核" value="已审核"></el-option>
-          <el-option label="未审核" value="未审核"></el-option>
+          <el-option label="待审核" value="待审核"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -25,7 +25,7 @@
       <el-table-column label="状态" prop="status" sortable width="200"></el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.status" active-color="#d90000" active-text="未审核" active-value="未审核"
+          <el-switch v-model="scope.row.status" active-color="#d90000" active-text="待审核" active-value="待审核"
                      inactive-color="#11d922" inactive-text="已审核" inactive-value="已审核"
                      @change="handleEdit(scope.$index, scope.row)">
           </el-switch>
