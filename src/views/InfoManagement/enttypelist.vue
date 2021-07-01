@@ -1,6 +1,10 @@
 <template>
   <div>
-    <el-button @click="gotolink" class="btn btn-success"  plain>图形</el-button>
+    <el-breadcrumb style="margin-bottom: 20px">
+      <el-breadcrumb-item :to="{ path: '/mainlist' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item><a>委托类型</a></el-breadcrumb-item>
+    </el-breadcrumb>
+    <el-button @click="gotolink" class="btn btn-success" plain>图形</el-button>
     <el-button type="success" @click="dialogFormVisible = true" plain>添加类型</el-button>
     <el-dialog title="添加类型" :visible.sync="dialogFormVisible">
       <el-form :model="form">

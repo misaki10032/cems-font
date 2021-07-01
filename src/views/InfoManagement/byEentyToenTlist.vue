@@ -1,5 +1,10 @@
 <template>
   <div>
+    <el-breadcrumb style="margin-bottom: 20px">
+      <el-breadcrumb-item :to="{ path: '/mainlist' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/enttypelist' }">委托类型</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/userlist">类型详情</a></el-breadcrumb-item>
+    </el-breadcrumb>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item>
         <el-button type="success" @click="goback">返回</el-button>

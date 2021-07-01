@@ -1,5 +1,10 @@
 <template>
   <div style="height:100%;">
+    <el-breadcrumb style="margin-bottom: 20px">
+      <el-breadcrumb-item :to="{ path: '/mainlist' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/entlist' }">委托管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a>图形展示</a></el-breadcrumb-item>
+    </el-breadcrumb>
     <el-button @click="gotolink" class="btn btn-success" plain>表格</el-button>
     <el-row>
       <el-col :span="18">

@@ -16,6 +16,7 @@ import adminlist from "../views/admin/Management/adminlist.vue";
 import byEentyToenTlist from "../views/InfoManagement/byEentyToenTlist.vue"
 import adminLevelManagement from "@/views/admin/Management/adminLevelManagement";
 import meMessage from "../views/admin/space/meMessage"
+import mainlist from "../views/InfoManagement/mainList.vue"
 Vue.use(router)
 var rout = new router({
     routes: [{
@@ -26,10 +27,15 @@ var rout = new router({
         path: '/main',
         name: 'main',
         component: main,
-        children: [{
-            path: "/userlist",
-            component: userlist
-        },
+        children: [
+            {
+                path: "/mainlist",
+                component: mainlist
+            },
+            {
+                path: "/userlist",
+                component: userlist
+            },
             {
                 path: "/entlist",
                 component: entlist

@@ -1,5 +1,9 @@
 <template>
   <div>
+    <el-breadcrumb style="margin-bottom: 20px">
+      <el-breadcrumb-item :to="{ path: '/mainlist' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item><a>用户管理</a></el-breadcrumb-item>
+    </el-breadcrumb>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="手机号">
         <el-input v-model="formInline.user" placeholder="手机号"></el-input>

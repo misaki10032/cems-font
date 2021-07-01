@@ -1,5 +1,9 @@
 <template>
   <div>
+    <el-breadcrumb style="margin-bottom: 20px">
+      <el-breadcrumb-item :to="{ path: '/mainlist' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/articlelist' }">帖子管理</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-form :inline="true" :model="formArticle" class="demo-form-inline">
       <el-form-item label="帖子标题">
         <el-input v-model="formArticle.title" placeholder="帖子标题"></el-input>

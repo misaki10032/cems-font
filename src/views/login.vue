@@ -97,7 +97,8 @@
           <el-input v-model="form2.newPsw" autocomplete="off" placeholder="请输入密码" type="password"></el-input>
         </el-form-item>
         <el-form-item v-show="bol2" :label-width="formLabelWidth" label="确认密码" prop="newPsw1">
-          <el-input v-model="form2.newPsw1" autocomplete="off" placeholder="再次输入密码" type="password"></el-input>
+          <el-input v-model="form2.newPsw1" autocomplete="off" placeholder="再次输入密码" type="password">
+          </el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="dialogFormVisible2 = false">取 消</el-button>
@@ -125,6 +126,15 @@ export default {
       if (value === '') {
         callback(new Error('请再次输入密码'));
       } else if (value !== this.form2.newPsw) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
+    var checkPsw3 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.form1.psw) {
         callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
@@ -247,48 +257,62 @@ export default {
         newPsw1: ""
       },
       form2Rules: {
-        acc: [
-          {validator: checkAcc1, trigger: 'blur'}
-        ],
-        newPsw: [
-          {validator: checkPsw, trigger: 'blur'}
-        ],
-        newPsw1: [
-          {validator: checkPsw2, trigger: 'blur'}
-        ],
-        email: [
-          {validator: checkEmail1, trigger: 'blur'}
-        ], code: [
-          {validator: checkCode, trigger: 'blur'}
-        ]
+        acc: [{
+          validator: checkAcc1,
+          trigger: 'blur'
+        }],
+        newPsw: [{
+          validator: checkPsw,
+          trigger: 'blur'
+        }],
+        newPsw1: [{
+          validator: checkPsw2,
+          trigger: 'blur'
+        }],
+        email: [{
+          validator: checkEmail1,
+          trigger: 'blur'
+        }],
+        code: [{
+          validator: checkCode,
+          trigger: 'blur'
+        }]
       },
       formRule: {
-        phone: [
-          {validator: checkAcc, trigger: 'blur'}
-        ],
-        psw: [
-          {validator: checkPsw, trigger: 'blur'}
-        ],
-        desc: [
-          {validator: checkDec, trigger: 'blur'}
-        ]
+        phone: [{
+          validator: checkAcc,
+          trigger: 'blur'
+        }],
+        psw: [{
+          validator: checkPsw,
+          trigger: 'blur'
+        }],
+        desc: [{
+          validator: checkDec,
+          trigger: 'blur'
+        }]
       },
       form1Rules: {
-        acc: [
-          {validator: checkAcc, trigger: 'blur'}
-        ],
-        psw: [
-          {validator: checkPsw, trigger: 'blur'}
-        ],
-        psw2: [
-          {validator: checkPsw2, trigger: 'blur'}
-        ],
-        phoneTwo: [
-          {validator: checkPhone, trigger: 'blur'}
-        ],
-        email: [
-          {validator: checkEmail, trigger: 'blur'}
-        ]
+        acc: [{
+          validator: checkAcc,
+          trigger: 'blur'
+        }],
+        psw: [{
+          validator: checkPsw,
+          trigger: 'blur'
+        }],
+        psw2: [{
+          validator: checkPsw3,
+          trigger: 'blur'
+        }],
+        phoneTwo: [{
+          validator: checkPhone,
+          trigger: 'blur'
+        }],
+        email: [{
+          validator: checkEmail,
+          trigger: 'blur'
+        }]
       },
       loginForm: {
         num: "",
@@ -343,7 +367,8 @@ export default {
       }, 1000);
       this.$axios.get("forgetPsw", {
         params: {
-          acc, email
+          acc,
+          email
         }
       }).then(res => {
         if (res.data == '203') {
@@ -364,30 +389,29 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.$axios.post("/register", this.form1).then(res => {
-                if (res.data == "200") {
-                  this.$message({
-                    message: '注册成功',
-                    type: 'success'
-                  });
-                  this.dialogFormVisible1 = false;
-                } else if (res.data == "401") {
-                  this.$message({
-                    message: '账号已存在!',
-                    type: 'error'
-                  });
-                } else if (res.data == "402") {
-                  this.$message({
-                    message: '手机号已存在!',
-                    type: 'error'
-                  });
-                } else {
-                  this.$message({
-                    message: '邮箱已存在!',
-                    type: 'error'
-                  });
-                }
-              }
-          )
+            if (res.data == "200") {
+              this.$message({
+                message: '注册成功',
+                type: 'success'
+              });
+              this.dialogFormVisible1 = false;
+            } else if (res.data == "401") {
+              this.$message({
+                message: '账号已存在!',
+                type: 'error'
+              });
+            } else if (res.data == "402") {
+              this.$message({
+                message: '手机号已存在!',
+                type: 'error'
+              });
+            } else {
+              this.$message({
+                message: '邮箱已存在!',
+                type: 'error'
+              });
+            }
+          })
         } else {
           console.log('error submit!!');
           return false;

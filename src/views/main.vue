@@ -4,7 +4,7 @@
       <el-aside style="height: 100%;background-color: #ffffff;color: white;" width="250px">
         <el-menu router>
           <div style="height: 21px;text-align: center;padding: 20px 0 20px 0;background-color: #06baec;">
-            <h1><i class="el-icon-s-help"></i>后台管理系统</h1>
+            <h1 @click="toMainList"><i class="el-icon-s-help"></i>后台管理系统</h1>
           </div>
           <el-submenu :class="{ levelInsufficient:isSuper}" index="1">
             <template slot="title"><i class="el-icon-message"></i>信息管理</template>
@@ -38,7 +38,6 @@
         <el-header style="text-align: right; font-size: 16px;height: 61px;">
           <el-menu active-text-color="#15087c" background-color="#06baec" router
                    class="el-menu-demo" mode="horizontal" text-color="#fff" @select="handleSelect">
-            <el-menu-item index="1">处理中心</el-menu-item>
             <el-submenu :class="{levelInsufficient:isRoot}" index="2">
               <template slot="title">管理员管理</template>
               <el-menu-item index="/adminlist">管理员信息</el-menu-item>
@@ -96,8 +95,12 @@ export default {
       this.isSuper = false;
       this.isRoot = true;
     }
+    this.$router.push("/mainlist")
   },
   methods: {
+    toMainList() {
+      this.$router.push("/mainlist")
+    },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },

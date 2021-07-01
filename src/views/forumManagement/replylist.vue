@@ -1,5 +1,10 @@
 <template>
   <div>
+    <el-breadcrumb style="margin-bottom: 20px">
+      <el-breadcrumb-item :to="{ path: '/mainlist' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/commentlist' }">评论管理</el-breadcrumb-item>
+      <el-breadcrumb-item><a>回复管理</a></el-breadcrumb-item>
+    </el-breadcrumb>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="搜索内容">
         <el-input v-model="formInline.region" placeholder="内容"></el-input>

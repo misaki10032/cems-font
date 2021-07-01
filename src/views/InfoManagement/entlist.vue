@@ -1,7 +1,10 @@
 <template>
   <div>
+    <el-breadcrumb style="margin-bottom: 20px">
+      <el-breadcrumb-item :to="{ path: '/mainlist' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item><a>委托管理</a></el-breadcrumb-item>
+    </el-breadcrumb>
     <el-button @click="goto" class="btn btn-success" plain>图形</el-button>
-
     <el-table :data="tableData" style="width: 100%;">
       <el-table-column fixed label="ID" v-model="form.entrustId" prop="id" sortable width="100"></el-table-column>
       <el-table-column v-model="form.entConsignor" prop="ientConsignord" label="委托人" width="70">
@@ -37,7 +40,6 @@
         </template>
       </el-table-column>
     </el-table>
-
     <el-pagination :current-page="pageInfo.currentPage" :page-size="pageInfo.pageSize"
                    :page-sizes="[3, 5, 8, 20]" :total="pageInfo.total" layout="total, sizes, prev, pager, next, jumper"
                    @size-change="handleSizeChange" @current-change="handleCurrentChange">
