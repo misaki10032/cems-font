@@ -10,8 +10,8 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 Vue.use(router);
-// axios.defaults.baseURL = "http://localhost:9999/web/";
-axios.defaults.baseURL = "http://139.196.94.36:9999/web/";
+axios.defaults.baseURL = "http://localhost:9999/web/";
+//axios.defaults.baseURL = "http://139.196.94.36:9999/web/";
 
 
 axios.interceptors.request.use(config => {
