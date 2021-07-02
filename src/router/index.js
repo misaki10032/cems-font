@@ -27,12 +27,13 @@ var rout = new router({
     }, {
         path: '/main',
         name: 'main',
+        redirect: "/mainlist",
         component: main,
         children: [
-			{
-				path:"/notice",
-				component:notice
-			},
+            {
+                path: "/notice",
+                component: notice
+            },
             {
                 path: "/mainlist",
                 component: mainlist

@@ -103,7 +103,6 @@
 				this.isSuper = false;
 				this.isRoot = true;
 			}
-			this.$router.push("/mainlist")
 		},
 		methods: {
 			toMainList() {

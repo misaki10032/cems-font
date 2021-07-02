@@ -13,7 +13,7 @@
     <el-table :data="tableData" style="width: 100%;">
       <el-table-column fixed label="委托号" prop="entrustId" sortable width="90"></el-table-column>
       <el-table-column fixed label="委托类容" prop="entData" show-overflow-tooltip width="500"></el-table-column>
-      <el-table-column fixed label="委托编号" prop="entConsignor" width="66"></el-table-column>
+      <el-table-column fixed label="委托编号" prop="entConsignor" width="80"></el-table-column>
       <el-table-column fixed label="代理ID" prop="entAgent" width="66"></el-table-column>
       <el-table-column fixed label="委托类型" prop="entType" width="90"></el-table-column>
       <el-table-column fixed label="进度安排" prop="entPlan" width="90"></el-table-column>

@@ -12,13 +12,14 @@
 					<el-input v-model="form.text" autocomplete="off" placeholder="请输入内容"></el-input>
 				</el-form-item>
 				<el-form-item :label-width="formLabelWidth" label="开始时间" prop="time">
-					<el-date-picker v-model="form.time" type="date" placeholder="选择开始日期">
-					</el-date-picker>
-				</el-form-item>
-				<el-form-item :label-width="formLabelWidth" label="截止时间" prop="time1">
-					<el-date-picker v-model="form.time1" type="date" placeholder="选择截止日期">
-					</el-date-picker>
-				</el-form-item>
+          <!--					<el-date-picker v-model="form.time" type="date" placeholder="选择开始日期">-->
+          <!--					</el-date-picker>-->
+          <el-date-picker v-model="form.time" placeholder="选择开始时间" type="datetime"></el-date-picker>
+        </el-form-item>
+        <el-form-item :label-width="formLabelWidth" label="截止时间" prop="time1">
+          <el-date-picker v-model="form.time1" placeholder="选择截止日期" type="datetime">
+          </el-date-picker>
+        </el-form-item>
 				<el-form-item style="text-align: center;">
 					<el-button @click="dialogFormVisible=false">取 消</el-button>
 					<el-button type="primary" @click="subForm('form')">确 定</el-button>
